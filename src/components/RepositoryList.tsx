@@ -11,9 +11,10 @@ interface RepositoryListProps {
     repositories: Repository[];
     filter: string;
     languageFilter: string;
+    isLoading: boolean;
 }
 
-const RepositoryList: React.FC<RepositoryListProps> = ({ repositories }) => {
+const RepositoryList: React.FC<RepositoryListProps> = ({ repositories, isLoading }) => {
     const [filter, setFilter] = useState<string>('');
     const [languageFilter, setLanguageFilter] = useState<string>('');
 
@@ -43,11 +44,20 @@ const RepositoryList: React.FC<RepositoryListProps> = ({ repositories }) => {
                     className="ml-2 border p-2 rounded"
                 />
             </div>
-            <ul className="list-none p-0">
-                {filteredRepositories.map((repo) => (
-                    <RepositoryListItem key={repo.id} repository={repo} />
-                ))}
-            </ul>
+
+            {isLoading ? (
+                <ul className="p-0">
+                    {[...Array(3)].map((_, index) => (
+                        <RepositoryListItem isLoading={true}/>
+                    ))}
+                </ul>
+            ) : (
+                <ul className="p-0">
+                    {filteredRepositories.map((repo) => (
+                        <RepositoryListItem key={repo.id} repository={repo} isLoading={false}/>
+                    ))}
+                </ul>
+            )}
         </div>
     );
 };

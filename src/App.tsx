@@ -1,10 +1,9 @@
-// App.tsx
 import React, { useState } from 'react';
 import Header from './components/Header';
 import RepositorySearch from './components/RepositorySearch';
-import Loader from './components/Loader';
 import Error from './components/Error';
-import { getUserRepos } from './services/githubService'; // Import the getUserRepos function
+import { getUserRepos } from './services/githubService';
+import RepositoryList from "./components/RepositoryList"; // Import the getUserRepos function
 
 const App: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(false);
@@ -15,6 +14,8 @@ const App: React.FC = () => {
         try {
             setLoading(true);
 
+            // Simulate a delay
+            await new Promise((resolve) => setTimeout(resolve, 500));
             const data = await getUserRepos(username);
 
             setLoading(false);
@@ -31,7 +32,7 @@ const App: React.FC = () => {
         <div className="container mx-auto p-4">
             <Header />
             <RepositorySearch onSearch={handleSearch} repositories={repositories} />
-            {loading && <Loader />}
+            <RepositoryList repositories={repositories} filter={''} languageFilter={''} isLoading={loading} />
             {error && <Error message={error} />}
         </div>
     );

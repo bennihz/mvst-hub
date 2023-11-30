@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import SearchBar from './SearchBar';
-import RepositoryList from './RepositoryList';
 
 interface Repository {
     id: number;
@@ -18,17 +17,14 @@ const RepositorySearch: React.FC<RepositorySearchProps> = ({ onSearch, repositor
     const [languageFilter, setLanguageFilter] = useState<string>('');
 
     const handleSearch = async (username: string) => {
-        // Call the parent component's onSearch function
         await onSearch(username);
-        // Reset filters after search
         setFilter('');
         setLanguageFilter('');
     };
 
     return (
-        <div>
+        <div className={"py-2"}>
             <SearchBar onSearch={handleSearch} />
-            <RepositoryList repositories={repositories} filter={filter} languageFilter={languageFilter} />
         </div>
     );
 };
