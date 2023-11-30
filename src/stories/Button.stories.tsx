@@ -1,18 +1,24 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
+import { Meta, Story } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
+import Button, { ButtonProps } from '../components/common/Button';
 
-import Button from "./../components/common/Button"
-
-const meta: Meta<typeof Button> = {
+export default {
+    title: 'Button',
     component: Button,
+} as Meta;
+
+const Template: Story<ButtonProps> = (args) => <Button {...args} />;
+
+export const Primary = Template.bind({});
+Primary.args = {
+    label: 'Click me',
+    onClick: action('clicked'),
 };
 
-export default meta;
-type Story = StoryObj<typeof Button>;
-
-export const Basic: Story = {
-    render: () => <Button variant={"primary"} label={"Press me"} />,
-};
-
-export const WithProp: Story = {
-    render: () => <Button variant={"primary"} label={"Press me"} />,
+export const Secondary = Template.bind({});
+Secondary.args = {
+    label: 'Click me',
+    variant: 'secondary',
+    onClick: action('clicked'),
 };
