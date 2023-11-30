@@ -1,14 +1,25 @@
 import React, { useState } from 'react';
 import Header from './components/Header';
 import RepositorySearch from './components/RepositorySearch';
+import ListFilter from './components/ListFilter';
+import RepositoryList from './components/RepositoryList';
+import useFilter from './hooks/useFilter';
 import Error from './components/Error';
 import { getUserRepos } from './services/githubService';
-import RepositoryList from "./components/RepositoryList"; // Import the getUserRepos function
+import { useEffect } from 'react';
+
 
 const App: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
     const [repositories, setRepositories] = useState<any[]>([]);
+
+    const { filteredRepositories, handleFilterChange } = useFilter(repositories, {
+        nameFilter: '',
+        languageFilter: '',
+    });
+
+    useEffect(() => {}, [repositories, filteredRepositories]);
 
     const handleSearch = async (username: string) => {
         try {
@@ -31,8 +42,9 @@ const App: React.FC = () => {
     return (
         <div className="container mx-auto p-4">
             <Header />
-            <RepositorySearch onSearch={handleSearch} repositories={repositories} />
-            <RepositoryList repositories={repositories} filter={''} languageFilter={''} isLoading={loading} />
+            <RepositorySearch onSearch={handleSearch} />
+            <ListFilter onFilterChange={handleFilterChange} />
+            <RepositoryList repositories={filteredRepositories} isLoading={loading} />
             {error && <Error message={error} />}
         </div>
     );

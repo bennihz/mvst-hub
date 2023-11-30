@@ -1,25 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import SearchBar from './SearchBar';
-
-interface Repository {
-    id: number;
-    name: string;
-    language: string;
-}
 
 interface RepositorySearchProps {
     onSearch: (username: string) => Promise<void>;
-    repositories: Repository[];
 }
 
-const RepositorySearch: React.FC<RepositorySearchProps> = ({ onSearch, repositories }) => {
-    const [filter, setFilter] = useState<string>('');
-    const [languageFilter, setLanguageFilter] = useState<string>('');
+const RepositorySearch: React.FC<RepositorySearchProps> = ({ onSearch }) => {
+
 
     const handleSearch = async (username: string) => {
         await onSearch(username);
-        setFilter('');
-        setLanguageFilter('');
     };
 
     return (
