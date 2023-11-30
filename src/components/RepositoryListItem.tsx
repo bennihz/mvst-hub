@@ -24,9 +24,8 @@ const RepositoryListItem: React.FC<RepositoryListItemProps> = ({ repository = {}
                     backgroundColor="#e1e1e1"
                     foregroundColor="#f2f2f2"
                 >
-                    <rect x="0" y="0" rx="3" ry="3" width="400" height="20" />
-                    <rect x="0" y="30" rx="3" ry="3" width="380" height="10" />
-                    <rect x="0" y="45" rx="3" ry="3" width="350" height="10" />
+                    <rect x="0" y="0" rx="3" ry="3" width="200" height="25" />
+                    <rect x="0" y="40" rx="3" ry="3" width="150" height="15" />
                 </ContentLoader>
             </li>
             ) : (
