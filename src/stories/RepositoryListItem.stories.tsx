@@ -15,7 +15,10 @@ Default.args = {
     repository: {
         id: 4,
         name: 'repository name',
-        language: 'C++',
+        primaryLanguage: {
+                name: 'C++'
+            },
+        description: 'lorem ipsumm dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum!',
     }
 };
 

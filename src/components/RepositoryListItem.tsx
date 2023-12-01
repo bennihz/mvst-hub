@@ -4,7 +4,10 @@ import ContentLoader from "react-content-loader";
 interface Repository {
     id: number;
     name: string;
-    language: string;
+    primaryLanguage: {
+        name: string;
+    };
+    description: string;
 }
 
 export interface RepositoryListItemProps {
@@ -31,7 +34,8 @@ const RepositoryListItem: React.FC<RepositoryListItemProps> = ({ repository = {}
             ) : (
             <li className="border p-4 mb-4 rounded transition duration-300 ease-in-out list-none transform hover:scale-105">
                 <h3 className="text-xl font-bold mb-2">{repository.name}</h3>
-                <p className="text-gray-600">Language: {repository.language === undefined ? 'not specified' : repository.language}</p>
+                <p className="text-gray-600">{repository.primaryLanguage === undefined ? 'language not specified' : repository.primaryLanguage.name}</p>
+                <p className="text-gray-500 text-sm">{repository.description === null ? 'no description' : repository.description}</p>
             </li>
             )}
         </>

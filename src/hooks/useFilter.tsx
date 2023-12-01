@@ -3,7 +3,10 @@ import { useState, useEffect } from 'react';
 interface Repository {
     id: number;
     name: string;
-    language: string;
+    primaryLanguage: {
+        name: string;
+    }
+    description: string;
 }
 
 interface FilterOptions {
@@ -19,7 +22,7 @@ const useFilter = (repositories: Repository[], initialOptions: FilterOptions) =>
         const filteredRepos = repositories.filter((repo) => {
             const matchesName = repo.name.toLowerCase().includes(filterOptions.nameFilter.toLowerCase());
             const matchesLanguage =
-                !filterOptions.languageFilter || repo.language.toLowerCase() === filterOptions.languageFilter.toLowerCase();
+                !filterOptions.languageFilter || repo.primaryLanguage.name.toLowerCase() === filterOptions.languageFilter.toLowerCase();
 
             return matchesName && matchesLanguage;
         });
