@@ -1,13 +1,5 @@
 import { useState, useEffect } from 'react';
-
-interface Repository {
-    id: number;
-    name: string;
-    primaryLanguage: {
-        name: string;
-    }
-    description: string;
-}
+import {Repository} from "../types/global";
 
 interface FilterOptions {
     nameFilter: string;

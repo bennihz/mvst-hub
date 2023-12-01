@@ -1,14 +1,6 @@
 import React from 'react';
 import ContentLoader from "react-content-loader";
-
-interface Repository {
-    id: number;
-    name: string;
-    primaryLanguage: {
-        name: string;
-    };
-    description: string;
-}
+import {Repository} from "../types/global";
 
 export interface RepositoryListItemProps {
     repository?: Repository;

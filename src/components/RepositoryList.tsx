@@ -1,14 +1,7 @@
 import React from 'react';
 import RepositoryListItem from './RepositoryListItem';
+import {Repository} from "../types/global";
 
-interface Repository {
-    id: number;
-    name: string;
-    primaryLanguage: {
-        name: string;
-    };
-    description: string;
-}
 
 interface RepositoryListProps {
     repositories: Repository[];
