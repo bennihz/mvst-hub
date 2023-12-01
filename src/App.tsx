@@ -26,7 +26,7 @@ const App: React.FC = () => {
             setLoading(true);
 
             // Simulate a delay
-            await new Promise((resolve) => setTimeout(resolve, 500));
+            await new Promise((resolve) => setTimeout(resolve, 300));
             const data = await getUserRepos(username);
 
             setLoading(false);
