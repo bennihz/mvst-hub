@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:3001/graphql-proxy';
+const BASE_URL = 'https://mvst-hub-proxy.onrender.com/graphql-proxy';
 
 export const getUserRepos = async (username: string): Promise<any[]> => {
     const query = `
