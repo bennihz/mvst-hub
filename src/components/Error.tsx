@@ -1,11 +1,11 @@
-import React from 'react';
+import React from 'react'
 
 interface ErrorProps {
-    message: string;
+    message: string
 }
 
 const Error: React.FC<ErrorProps> = ({ message }) => {
-    return <div className="text-red-500">{message}</div>;
-};
+    return <div className="text-red-500">{message}</div>
+}
 
-export default Error;
+export default Error
