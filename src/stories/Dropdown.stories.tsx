@@ -17,8 +17,18 @@ const navigationItems = [
     { linkName: 'Not specified' },
 ]
 
+function handleRepoLangFilter(text: string) {
+    console.log(text)
+}
+
 const Template: Story = (args) => {
-    return <Dropdown {...args} navigationItems={navigationItems} />
+    return (
+        <Dropdown
+            {...args}
+            navigationItems={navigationItems}
+            onChange={handleRepoLangFilter}
+        />
+    )
 }
 
 export const Default = Template.bind({})
