@@ -16,15 +16,15 @@ const UserOverview: React.FC<UserOverviewProps> = ({
     location,
 }) => {
     return (
-        <div className="flex flex-col items-center p-4 border border-gray-300 rounded-md">
-            <div className="mb-4">
+        <div className="flex flex-row md:flex-col items-start p-4 border border-gray-300 rounded-md">
+            <div className="mb-2 md:mb-4 w-1/3">
                 <img
                     src={avatarUrl}
                     alt={`${username}'s avatar`}
-                    className="w-4/5 h-4/5 rounded-full mx-auto" // Center the image horizontally
+                    className="w-4/5 h-4/5 rounded-full " // Center the image horizontally
                 />
             </div>
-            <div className="text-left">
+            <div className="text-left w-2/3">
                 {' '}
                 {/* Keep text elements aligned to the left */}
                 <h2 className="text-xl font-semibold mb-2">{username}</h2>
