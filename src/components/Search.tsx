@@ -1,36 +1,26 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react';
 
 export interface SearchRepoProps {
-    onSearch: (text: string) => void
-    placeholder: string
+    onSearch: (text: string) => void;
+    placeholder: string;
 }
 
 const Search: React.FC<SearchRepoProps> = ({ onSearch, placeholder }) => {
-    const [text, setText] = useState<string>('')
+    const [text, setText] = useState<string>('');
 
-    const handleSearch = () => {
-        if (text.trim() !== '') {
-            onSearch(text)
-        }
-    }
-
-    const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        setText(e.currentTarget.value)
-        if (e.key === 'Enter') {
-            handleSearch()
-        }
-    }
+    useEffect(() => {
+        onSearch(text);
+    }, [text]);
 
     return (
         <>
-            {/*    <!-- Component: Rounded search input  --> */}
             <div className="relative mb-4">
                 <input
                     type="text"
                     name="id-b16"
                     placeholder={placeholder}
                     className="relative w-full h-10 px-4 pr-12 text-sm transition-all border rounded outline-none peer border-slate-300 text-slate-600 autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-stone-400 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400  bg-zinc-50"
-                    onKeyPress={handleKeyPress}
+                    onChange={(e) => setText(e.target.value)}
                 />
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -42,7 +32,6 @@ const Search: React.FC<SearchRepoProps> = ({ onSearch, placeholder }) => {
                     aria-hidden="true"
                     aria-labelledby="title-12 description-12"
                     role="graphics-symbol"
-                    onClick={handleSearch}
                 >
                     <title id="title-12">Search icon</title>
                     <desc id="description-12">Icon description here</desc>
@@ -54,7 +43,7 @@ const Search: React.FC<SearchRepoProps> = ({ onSearch, placeholder }) => {
                 </svg>
             </div>
         </>
-    )
-}
+    );
+};
 
-export default Search
+export default Search;
