@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 
 export interface SearchRepoProps {
-    onSearch: (text: string) => void;
-    placeholder: string;
+    onSearch: (text: string) => void
+    placeholder: string
 }
 
 const Search: React.FC<SearchRepoProps> = ({ onSearch, placeholder }) => {
-    const [text, setText] = useState<string>('');
+    const [text, setText] = useState<string>('')
 
     useEffect(() => {
-        onSearch(text);
-    }, [text]);
+        onSearch(text)
+    }, [text])
 
     return (
         <>
@@ -43,7 +43,7 @@ const Search: React.FC<SearchRepoProps> = ({ onSearch, placeholder }) => {
                 </svg>
             </div>
         </>
-    );
-};
+    )
+}
 
-export default Search;
+export default Search
