@@ -1,21 +1,24 @@
 import React from 'react'
 import RepositoryListItem from './RepositoryListItem'
 import { Repository } from '../types/global'
+import NoRepositoriesFound from '../stories/NoRepositoriesFound'
 
-interface RepositoryListProps {
+export interface RepositoryListProps {
     repositories: Repository[]
     isLoading: boolean
+    page: number
 }
 
 const RepositoryList: React.FC<RepositoryListProps> = ({
     repositories,
     isLoading,
+    page,
 }) => {
     return (
         <div>
             {isLoading ? (
                 <ul className="list-none p-0">
-                    {[...Array(3)].map((_, index) => (
+                    {[...Array(7)].map((_, index) => (
                         <RepositoryListItem
                             key={`loading-${index}`}
                             isLoading={true}
@@ -28,6 +31,8 @@ const RepositoryList: React.FC<RepositoryListProps> = ({
                         />
                     ))}
                 </ul>
+            ) : repositories.length === 0 ? (
+                <NoRepositoriesFound />
             ) : (
                 <ul className="list-none p-0">
                     {repositories.map((repo) => (

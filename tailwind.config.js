@@ -7,6 +7,8 @@ module.exports = {
   darkMode: ['class', '[data-mode="dark"]'],
   theme: {
     extend: {
+      height: {
+      },
       colors: {
         safetyOrange: '#E77917',
         safetyOrangeDark: '#ea580c',
