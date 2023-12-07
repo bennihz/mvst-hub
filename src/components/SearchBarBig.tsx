@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 
 export interface SearchBarBigProps {
-    onSearch: (username: string) => void;
+    onSearch: (username: string) => void
 }
 
 const SearchBarBig: React.FC<SearchBarBigProps> = ({ onSearch }) => {
-    const [username, setUsername] = useState<string>('');
+    const [username, setUsername] = useState<string>('')
 
     const handleSearch = () => {
         if (username.trim() !== '') {
-            onSearch(username);
+            onSearch(username)
         }
-    };
+    }
 
     const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
-            handleSearch();
+            handleSearch()
         }
-    };
+    }
 
     return (
         <>
@@ -53,7 +53,7 @@ const SearchBarBig: React.FC<SearchBarBigProps> = ({ onSearch }) => {
                 </svg>
             </div>
         </>
-    );
-};
+    )
+}
 
-export default SearchBarBig;
+export default SearchBarBig

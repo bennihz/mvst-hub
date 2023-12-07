@@ -99,8 +99,7 @@ export default function Dropdown(props: {
             >
                 <span className="sm:inline">
                     {currentItem !== null
-                        ? navigationItems[currentItem]?.linkName ||
-                          'Language'
+                        ? navigationItems[currentItem]?.linkName || 'Language'
                         : 'Language'}
                 </span>
                 <span className="relative only:-mx-5">
@@ -143,7 +142,6 @@ export default function Dropdown(props: {
                         focus:outline-none focus-visible:outline-none 
                         dark:hover:bg-zinc-700 dark:hover:text-gray-400 
                         dark:focus:border-gray-700 dark:focus:border-2`}
-
                         href="#"
                         onMouseDown={() => handleItemClick(-1)}
                     >

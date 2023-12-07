@@ -52,7 +52,9 @@ const RepositoryListItem: React.FC<RepositoryListItemProps> = ({
                 </li>
             ) : (
                 <li className="border border-neutral-300 p-4 mb-4 rounded transition list-none bg-white dark:bg-zinc-900 dark:border-neutral-800">
-                    <h3 className="text-xl font-bold dark:text-zinc-100 ">{name ?? 'No Name'}</h3>
+                    <h3 className="text-xl font-bold dark:text-zinc-100 ">
+                        {name ?? 'No Name'}
+                    </h3>
                     <p className="text-gray-600 mb-2 dark:text-gray-500">
                         {primaryLanguage?.name ?? 'Language not specified'}
                     </p>

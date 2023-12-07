@@ -27,7 +27,9 @@ const UserOverview: React.FC<UserOverviewProps> = ({
             <div className="text-left w-2/3 md:w-full">
                 {' '}
                 {/* Keep text elements aligned to the left */}
-                <h2 className="text-xl font-semibold mb-2 dark:text-w">{username}</h2>
+                <h2 className="text-xl font-semibold mb-2 dark:text-w">
+                    {username}
+                </h2>
                 <p className="text-gray-600 mb-2 dark:text-gray-500">{bio}</p>
                 {location && <p className="text-gray-500 mb-2">{location}</p>}
                 <a

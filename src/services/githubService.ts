@@ -1,4 +1,4 @@
-const BASE_URL = 'https://mvst-hub-proxy.onrender.com';
+const BASE_URL = 'https://mvst-hub-proxy.onrender.com'
 
 export interface getUserReposResponse {
     repositories: any[]
