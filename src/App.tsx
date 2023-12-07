@@ -186,9 +186,11 @@ const App: React.FC = () => {
             <Navbar />
             <div className="container mx-auto p-4">
                 <SearchBarBig onSearch={handleUserSearch} />
-                <div className="container flex">
-                    <div className="w-1/3">
-                        {userInfo && (
+                <div className="container flex flex-col md:flex-row md:gap-4 ">
+                    {userInfo && (
+                        <div className="mb-4 md:mb-0 w-full md:w-1/4">
+                            {' '}
+                            {/* Adjusted width for md and larger screens */}
                             <UserOverview
                                 avatarUrl={userInfo.avatarUrl}
                                 username={userInfo.login}
@@ -196,44 +198,48 @@ const App: React.FC = () => {
                                 profileUrl={userInfo.htmlUrl}
                                 location={userInfo.location}
                             />
-                        )}
-                    </div>
-                    <div className="w-2/3 pl-4">
+                        </div>
+                    )}
+                    <div className="md:w-3/4">
                         {userInfo && (
-                            <>
-                                <div className="flex gap-4">
-                                    <div className="w-3/5">
-                                        {' '}
-                                        {/* 60% width */}
-                                        <Search
-                                            onSearch={handleRepoNameFilter}
-                                            placeholder="Search for Repository"
-                                        />
-                                    </div>
-                                    <div className="w-2/5">
-                                        {' '}
-                                        {/* 40% width */}
-                                        <Dropdown
-                                            navigationItems={languages}
-                                            onChange={handleRepoLangFilter}
-                                        />
-                                    </div>
-                                </div>
-                                <RepositoryList
-                                    repositories={displayedRepositories}
-                                    isLoading={reposLoading}
-                                    page={page}
+                        <div className="flex flex-col w-full sm:flex-row sm:gap-4">
+                            <div className="mb-4 w-full sm:w-3/5">
+                                {' '}
+                                {/* Adjusted width for md and larger screens */}
+                                <Search
+                                    onSearch={handleRepoNameFilter}
+                                    placeholder="Search for Repository"
                                 />
-                            </>
-                        )}
-                        {error && <Error message={error} />}
-                        {filteredRepositories.length > 0 && (
-                            <Pagination
-                                isFirstPage={!hasPreviousPage}
-                                isLastPage={!hasNextPage}
-                                onPageChange={handlePageChange}
-                            />
-                        )}
+                            </div>
+                            <div className="w-full sm:w-2/5">
+                                {' '}
+                                {/* Adjusted width for md and larger screens */}
+                                <Dropdown
+                                    navigationItems={languages}
+                                    onChange={handleRepoLangFilter}
+                                />
+                            </div>
+                        </div>
+                                )}
+                        <div className="w-full">
+                            {userInfo && (
+                                <>
+                                    <RepositoryList
+                                        repositories={displayedRepositories}
+                                        isLoading={reposLoading}
+                                        page={page}
+                                    />
+                                    {error && <Error message={error} />}
+                                    {filteredRepositories.length > 0 && (
+                                        <Pagination
+                                            isFirstPage={!hasPreviousPage}
+                                            isLastPage={!hasNextPage}
+                                            onPageChange={handlePageChange}
+                                        />
+                                    )}
+                                </>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>
