@@ -88,7 +88,11 @@ export default function Dropdown(props: {
     return (
         <div className="relative inline-flex w-full mb-4 md:mb-0">
             <button
-                className="inline-flex w-full h-10 items-center justify-center gap-2 whitespace-nowrap rounded bg-emerald-500 px-5 text-sm font-medium tracking-wide text-white transition duration-300 hover:bg-emerald-600 focus:bg-emerald-700 focus-visible:outline-none disabled:cursor-not-allowed disabled:border-emerald-300 disabled:bg-emerald-300 disabled:shadow-none"
+                className="inline-flex w-full h-10 items-center justify-center gap-2 whitespace-nowrap
+                rounded bg-w dark:bg-zinc-900 px-5 text-sm text-gray-600 tracking-wide transition
+                duration-300 hover:bg-zinc-100 focus-visible:outline-none
+                disabled:cursor-not-allowed disabled:border-emerald-300 disabled:bg-emerald-300 border focus:bg-white dark:focus:bg-zinc-800
+                disabled:shadow-none  dark:text-gray-400 dark:border-gray-700 dark:focus:bg-zinc-900 dark:focus:border-sky-700 dark:focus:border-2 dark:hover:bg-zinc-900 dark:hover:text-gray-400 dark:hover:border-gray-700 dark:disabled:bg-gray-700 dark:disabled:text-gray-400 dark:disabled:border-gray-700 dark:disabled:cursor-not-allowed dark:disabled:shadow-none"
                 onClick={() => setIsOpen(!isOpen)}
                 aria-expanded={isOpen}
                 ref={wrapperRef}
@@ -125,16 +129,21 @@ export default function Dropdown(props: {
             <ul
                 className={`${
                     isOpen ? 'flex' : 'hidden'
-                } absolute top-full z-10 mt-1 flex w-full list-none flex-col rounded bg-white py-2 shadow-md shadow-slate-500/10`}
+                } absolute top-full z-10 mt-1 flex w-full list-none flex-col rounded bg-white dark:bg-zinc-900 py-2 shadow-md shadow-slate-500/10 dark:bg-zinc-900 dark:shadow-zinc-900/10 dark:border dark:border-neutral-800`}
             >
                 {/* Placeholder item for unselecting */}
                 <li key={-1}>
                     <a
                         className={`${
                             currentItem === -1
-                                ? 'bg-emerald-50 text-emerald-500'
+                                ? 'bg-sky-50 text-sky-600 dark:bg-sky-900 dark:text-gray-400'
                                 : 'bg-none text-slate-500'
-                        } flex items-start justify-start gap-2 p-2 px-5 transition-colors duration-300 hover:bg-emerald-50 hover:text-emerald-500 focus:bg-emerald-50 focus:text-emerald-600 focus:outline-none focus-visible:outline-none`}
+                        } flex items-start justify-start gap-2 p-2 px-5 transition-colors  
+                        duration-300 hover:bg-zinc-100 hover:text-sky-600 focus:bg-sky-50 dark:focus:bg-sky-900 focus:text-sky-600
+                        focus:outline-none focus-visible:outline-none 
+                        dark:hover:bg-zinc-700 dark:hover:text-gray-400 
+                        dark:focus:border-gray-700 dark:focus:border-2`}
+
                         href="#"
                         onMouseDown={() => handleItemClick(-1)}
                     >
@@ -149,9 +158,12 @@ export default function Dropdown(props: {
                         <a
                             className={`${
                                 index === currentItem
-                                    ? 'bg-emerald-50 text-emerald-500'
+                                    ? 'bg-sky-50 text-sky-600 dark:bg-sky-900 dark:text-gray-400'
                                     : 'bg-none text-slate-500'
-                            } flex items-start justify-start gap-2 p-2 px-5 transition-colors duration-300 hover:bg-emerald-50 hover:text-emerald-500 focus:bg-emerald-50 focus:text-emerald-600 focus:outline-none focus-visible:outline-none`}
+                            } flex items-start justify-start gap-2 p-2 px-5 transition-colors duration-300 hover:bg-zinc-100
+                             hover:text-sky-600 focus:bg-sky-50 focus:text-sky-600 focus:outline-none focus-visible:outline-none
+                              dark:hover:bg-zinc-700 dark:hover:text-gray-400 dark:focus:bg-zinc-900 dark:focus:border-sky-700
+                               dark:focus:border-2  dark:focus:border-gray-700 dark:disabled:bg-gray-700`}
                             href="#"
                             onMouseDown={() => handleItemClick(index)}
                         >

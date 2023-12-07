@@ -1,17 +1,25 @@
-import React, { useState } from 'react'
-import logoSrc from '../logotrans.png'
+import React, { useState } from 'react';
+import logoSrc from '../logotrans.png';
+import logoSrcDark from '../logotrans-dark.png';
+import darkmodeIcon from '../darkmode.png';
+import lightmodeIcon from '../lightmode.png';
 
-export default function Navbar() {
-    const [isToggleOpen, setIsToggleOpen] = useState(false)
+export interface NavbarProps {
+    darkMode: boolean;
+    onDarkModeToggle: () => void;
+}
+
+export default function Navbar({ darkMode, onDarkModeToggle }: NavbarProps) {
+    const [isToggleOpen, setIsToggleOpen] = useState(false);
 
     return (
         <>
             {/*<!-- Component: Basic Navbar --> */}
-            <header className="border-b-1 relative z-20 w-full border-b border-slate-200 bg-zinc-50 shadow-lg shadow-slate-700/5 after:absolute after:top-full after:left-0 after:z-10 after:block after:h-px after:w-full after:bg-slate-200 lg:border-slate-200 lg:backdrop-blur-sm lg:after:hidden">
+            <header className="border-b-1 relative z-20 w-full border-b border-slate-200 bg-white shadow-lg shadow-slate-700/5 after:absolute after:top-full after:left-0 after:z-10 after:block after:h-px after:w-full after:bg-slate-200 lg:border-slate-200 lg:backdrop-blur-sm lg:after:hidden dark:bg-zinc-900 dark:border-gray-700">
                 <div className="relative mx-auto max-w-full px-6 lg:max-w-5xl xl:max-w-7xl 2xl:max-w-[96rem]">
                     <nav
                         aria-label="main navigation"
-                        className="flex h-[5.5rem] items-stretch justify-between font-medium text-slate-700"
+                        className="flex h-[5.5rem] items-stretch justify-between font-medium text-slate-700 dark:text-slate-300"
                         role="navigation"
                     >
                         <a
@@ -21,26 +29,31 @@ export default function Navbar() {
                             className="flex items-center gap-2 whitespace-nowrap py-3 text-lg focus:outline-none lg:flex-1"
                             href="/"
                         >
-                            <img className="h-12" src={logoSrc} alt="Logo" />
+                            <img
+                                className={`h-12`}
+                                src={darkMode ? logoSrcDark : logoSrc}
+                                alt="Logo"
+                            />
                         </a>
-                        {/*      <!-- Mobile trigger --> */}
+
+                        {/* Mobile trigger */}
                         <button
                             className={`relative order-10 block h-10 w-10 self-center lg:hidden
                 ${
-                    isToggleOpen
-                        ? 'visible opacity-100 [&_span:nth-child(1)]:w-6 [&_span:nth-child(1)]:translate-y-0 [&_span:nth-child(1)]:rotate-45 [&_span:nth-child(3)]:w-0 [&_span:nth-child(2)]:-rotate-45 '
-                        : ''
-                }
+                                isToggleOpen
+                                    ? 'visible opacity-100 [&_span:nth-child(1)]:w-6 [&_span:nth-child(1)]:translate-y-0 [&_span:nth-child(1)]:rotate-45 [&_span:nth-child(3)]:w-0 [&_span:nth-child(2)]:-rotate-45 '
+                                    : ''
+                            }
               `}
                             onClick={() => setIsToggleOpen(!isToggleOpen)}
                             aria-expanded={isToggleOpen ? 'true' : 'false'}
                             aria-label="Toggle navigation"
                         >
                             <div className="absolute top-1/2 left-1/2 w-6 -translate-x-1/2 -translate-y-1/2 transform">
-                                <span
-                                    aria-hidden="true"
-                                    className="absolute block h-0.5 w-9/12 -translate-y-2 transform rounded-full bg-slate-900 transition-all duration-300"
-                                ></span>
+                <span
+                    aria-hidden="true"
+                    className="absolute block h-0.5 w-9/12 -translate-y-2 transform rounded-full bg-slate-900 transition-all duration-300"
+                ></span>
                                 <span
                                     aria-hidden="true"
                                     className="absolute block h-0.5 w-6 transform rounded-full bg-slate-900 transition duration-300"
@@ -51,7 +64,8 @@ export default function Navbar() {
                                 ></span>
                             </div>
                         </button>
-                        {/*      <!-- Navigation links --> */}
+
+                        {/* Navigation links */}
                         <ul
                             role="menubar"
                             aria-label="Select page"
@@ -61,31 +75,23 @@ export default function Navbar() {
                                     : 'invisible opacity-0'
                             }`}
                         >
+                            {/* Dark mode toggle */}
                             <li role="none" className="flex items-stretch">
-                                <a
-                                    role="menuitem"
-                                    aria-haspopup="false"
-                                    className="flex items-center gap-2 py-4 text-stone-950 transition-colors duration-300 hover:text-safetyOrange focus:text-safetyOrangeDark focus:outline-none focus-visible:outline-none lg:px-8"
-                                    href="/"
+                                <button
+                                    className="flex items-center px-4 py-2"
+                                    onClick={onDarkModeToggle}
                                 >
-                                    <span>Home</span>
-                                </a>
-                            </li>
-                            <li role="none" className="flex items-stretch">
-                                <a
-                                    role="menuitem"
-                                    aria-haspopup="false"
-                                    className="flex items-center gap-2 py-4 text-stone-950 transition-colors duration-300 hover:text-safetyOrange focus:text-safetyOrangeDark focus:outline-none focus-visible:outline-none lg:px-8"
-                                    href="/"
-                                >
-                                    <span>About</span>
-                                </a>
+                                    <img
+                                        src={darkMode ? lightmodeIcon : darkmodeIcon}
+                                        alt="dark/light mode icon"
+                                        className="w-5 h-5"
+                                    ></img>
+                                </button>
                             </li>
                         </ul>
                     </nav>
                 </div>
             </header>
-            {/*<!-- End Basic Navbar--> */}
         </>
-    )
+    );
 }

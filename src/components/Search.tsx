@@ -19,7 +19,7 @@ const Search: React.FC<SearchRepoProps> = ({ onSearch, placeholder }) => {
                     type="text"
                     name="id-b16"
                     placeholder={placeholder}
-                    className="relative w-full h-10 px-4 pr-12 text-sm transition-all border rounded outline-none peer border-slate-300 text-slate-600 autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-stone-400 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400  bg-zinc-50"
+                    className="relative w-full h-10 px-4 pr-12 text-sm transition-all border rounded outline-none peer border-slate-300 text-slate-600 autofill:bg-white  invalid:border-pink-500 invalid:text-pink-500 focus:border-stone-400 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400 bg-white dark:bg-zinc-900 dark:border-gray-700 dark:focus:border-sky-700 dark:text-w"
                     onChange={(e) => setText(e.target.value)}
                 />
                 <svg
