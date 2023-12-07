@@ -86,18 +86,18 @@ export default function Dropdown(props: {
     }
 
     return (
-        <div className="relative inline-flex w-full">
+        <div className="relative inline-flex w-full mb-4 md:mb-0">
             <button
                 className="inline-flex w-full h-10 items-center justify-center gap-2 whitespace-nowrap rounded bg-emerald-500 px-5 text-sm font-medium tracking-wide text-white transition duration-300 hover:bg-emerald-600 focus:bg-emerald-700 focus-visible:outline-none disabled:cursor-not-allowed disabled:border-emerald-300 disabled:bg-emerald-300 disabled:shadow-none"
                 onClick={() => setIsOpen(!isOpen)}
                 aria-expanded={isOpen}
                 ref={wrapperRef}
             >
-                <span className="hidden sm:inline">
+                <span className="sm:inline">
                     {currentItem !== null
                         ? navigationItems[currentItem]?.linkName ||
-                          'Choose programming language'
-                        : 'Choose language'}
+                          'Language'
+                        : 'Language'}
                 </span>
                 <span className="relative only:-mx-5">
                     <svg

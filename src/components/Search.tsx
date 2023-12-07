@@ -14,7 +14,7 @@ const Search: React.FC<SearchRepoProps> = ({ onSearch, placeholder }) => {
 
     return (
         <>
-            <div className="relative mb-4">
+            <div className="relative">
                 <input
                     type="text"
                     name="id-b16"
