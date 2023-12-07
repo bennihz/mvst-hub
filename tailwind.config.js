@@ -2,21 +2,15 @@
 const colors = require('tailwindcss/colors')
 
 module.exports = {
+  darkMode: 'class',
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
-  // Toggle dark-mode based on .dark class or data-mode="dark"
-  darkMode: ['class', '[data-mode="dark"]'],
   theme: {
     extend: {
       height: {
       },
       colors: {
-        safetyOrange: '#E77917',
-        safetyOrangeDark: '#ea580c',
-        darkOrange: '#914c10',
-        green:'#439A86',
-        seasalt:'#FAFAFA',
-        black:'#130912',
-        cyan: colors.cyan,
+        neutral: colors.neutral,
+        w: '#ffffff',
       },
     },
   },

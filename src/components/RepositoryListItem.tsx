@@ -16,7 +16,7 @@ const RepositoryListItem: React.FC<RepositoryListItemProps> = ({
     return (
         <>
             {isLoading ? (
-                <li className="border p-4 mb-4 rounded flex items-start justify-start list-none">
+                <li className="border border-neurtal-300 p-4 mb-4 rounded flex items-start justify-start list-none bg-white dark:bg-zinc-900">
                     <ContentLoader
                         speed={0.5}
                         height={60}
@@ -51,9 +51,9 @@ const RepositoryListItem: React.FC<RepositoryListItemProps> = ({
                     </ContentLoader>
                 </li>
             ) : (
-                <li className="border p-4 mb-4 rounded transition duration-300 ease-in-out list-none transform hover:scale-105">
-                    <h3 className="text-xl font-bold">{name ?? 'No Name'}</h3>
-                    <p className="text-gray-600 mb-2">
+                <li className="border border-neutral-300 p-4 mb-4 rounded transition list-none bg-white dark:bg-zinc-900 dark:border-neutral-800">
+                    <h3 className="text-xl font-bold dark:text-zinc-100 ">{name ?? 'No Name'}</h3>
+                    <p className="text-gray-600 mb-2 dark:text-gray-500">
                         {primaryLanguage?.name ?? 'Language not specified'}
                     </p>
                     <p className="text-gray-500 text-sm">

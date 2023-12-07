@@ -1,31 +1,33 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
 export interface SearchBarBigProps {
-    onSearch: (username: string) => void
+    onSearch: (username: string) => void;
 }
 
 const SearchBarBig: React.FC<SearchBarBigProps> = ({ onSearch }) => {
-    const [username, setUsername] = useState<string>('')
+    const [username, setUsername] = useState<string>('');
 
     const handleSearch = () => {
         if (username.trim() !== '') {
-            onSearch(username)
+            onSearch(username);
         }
-    }
+    };
 
     const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
-            handleSearch()
+            handleSearch();
         }
-    }
+    };
 
     return (
         <>
             <div className="relative my-4">
                 <input
                     type="text"
-                    placeholder="Search for a user"
-                    className="relative w-full h-12 px-4 pr-12 transition-all border rounded outline-none peer border-slate-300 text-slate-600 autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-safetyOrange focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-500 bg-zinc-50"
+                    placeholder="Search for a GitHub-user"
+                    className="relative w-full h-12 px-4 pr-12 transition-all border rounded outline-none peer border-neutral-300
+                    text-slate-600 autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-2 focus:outline-none
+                    focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-500 bg-white dark:bg-zinc-900 dark:border-gray-700 dark:focus:border-sky-700 dark:text-w"
                     onChange={(e) => setUsername(e.target.value)}
                     onKeyPress={handleKeyPress}
                 />
@@ -51,7 +53,7 @@ const SearchBarBig: React.FC<SearchBarBigProps> = ({ onSearch }) => {
                 </svg>
             </div>
         </>
-    )
-}
+    );
+};
 
-export default SearchBarBig
+export default SearchBarBig;
