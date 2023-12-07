@@ -19,12 +19,11 @@ const App: React.FC = () => {
     const [error, setError] = useState<string | null>(null)
     const [username, setUsername] = useState<string>('')
     const [userInfo, setUserInfo] = useState<any | null>(null)
+    const [userNotFound, setUserNotFound] = useState<boolean>(false)
     const [hasNextPage, setHasNextPage] = useState<boolean>(false)
     const [hasPreviousPage, setHasPreviousPage] = useState<boolean>(false)
-
     const [repoNameFilter, setRepoNameFilter] = useState<string>('')
     const [repoLanguageFilter, setRepoLanguageFilter] = useState<string>('')
-
     const [filteredRepositories, setFilteredRepositories] = useState<any[]>([])
     const [allRepositories, setAllRepositories] = useState<any[]>([])
     const [displayedRepositories, setDisplayedRepositories] = useState<any[]>(
@@ -105,7 +104,16 @@ const App: React.FC = () => {
     const fetchUser = async () => {
         try {
             const userData = await getUserInfo(username)
-            setUserInfo(userData)
+            if (userData === null) {
+                setUserNotFound(true)
+                setUserInfo(null)
+                setAllRepositories([])
+
+                return
+            } else {
+                setUserNotFound(false)
+                setUserInfo(userData)
+            }
             setError(null)
         } catch (error) {
             console.error('Error fetching data', error)
@@ -138,7 +146,6 @@ const App: React.FC = () => {
     }
 
     useEffect(() => {
-        console.log('repoNameFilter', repoNameFilter)
         const filtered = allRepositories
             .filter((repo) =>
                 repo.name.toLowerCase().includes(repoNameFilter.toLowerCase()),
@@ -217,6 +224,11 @@ const App: React.FC = () => {
                                     profileUrl={userInfo.htmlUrl}
                                     location={userInfo.location}
                                 />
+                            </div>
+                        )}
+                        {userNotFound && (
+                            <div className="w-full md:w-1/4">
+                                <Error message="User not found." />
                             </div>
                         )}
                         <div className="md:w-3/4">

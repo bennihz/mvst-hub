@@ -42,7 +42,9 @@ export default function Navbar({ darkMode, onDarkModeToggle }: NavbarProps) {
                                 onClick={onDarkModeToggle}
                             >
                                 <img
-                                    src={darkMode ? lightmodeIcon : darkmodeIcon}
+                                    src={
+                                        darkMode ? lightmodeIcon : darkmodeIcon
+                                    }
                                     alt="dark/light mode icon"
                                     className="w-5 h-5"
                                 ></img>

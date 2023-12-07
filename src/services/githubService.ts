@@ -137,7 +137,9 @@ interface GitHubUser {
     htmlUrl: string
 }
 
-export const getUserInfo = async (username: string): Promise<GitHubUser> => {
+export const getUserInfo = async (
+    username: string,
+): Promise<GitHubUser | null> => {
     const query = `
     query {
       user(login: "${username}") {
@@ -163,13 +165,17 @@ export const getUserInfo = async (username: string): Promise<GitHubUser> => {
     }
 
     const { data } = await response.json()
-    const userData = data.user
 
-    return {
-        login: userData.login,
-        avatarUrl: userData.avatarUrl,
-        bio: userData.bio,
-        location: userData.location,
-        htmlUrl: userData.url,
+    if (data.user === null) {
+        return null
+    } else {
+        const userData = data.user
+        return {
+            login: userData.login,
+            avatarUrl: userData.avatarUrl,
+            bio: userData.bio,
+            location: userData.location,
+            htmlUrl: userData.url,
+        }
     }
 }
