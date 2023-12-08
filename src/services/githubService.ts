@@ -1,3 +1,5 @@
+import { UserInfo } from '../types/global'
+
 const BASE_URL = 'https://mvst-hub-proxy.onrender.com'
 
 export interface getUserReposResponse {
@@ -140,23 +142,15 @@ export const getUserReposAll = async (
     return { repositories: allRepositories }
 }
 
-interface GitHubUser {
-    login: string
-    avatarUrl: string
-    bio: string
-    location?: string
-    htmlUrl: string
-}
-
 /**
  * Fetches the user information of a GitHub user.
  * @param username
- * @returns GitHubUser
+ * @returns UserInfo
  * @returns null if the user does not exist
  */
 export const getUserInfo = async (
     username: string,
-): Promise<GitHubUser | null> => {
+): Promise<UserInfo | null> => {
     const query = `
     query {
       user(login: "${username}") {
@@ -165,6 +159,7 @@ export const getUserInfo = async (
         bio
         location
         url  # Use 'url' instead of 'htmlUrl'
+        name
       }
     }
   `
@@ -193,6 +188,7 @@ export const getUserInfo = async (
             bio: userData.bio,
             location: userData.location,
             htmlUrl: userData.url,
+            name: userData.name,
         }
     }
 }

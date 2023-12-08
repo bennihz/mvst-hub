@@ -20,9 +20,12 @@ const Template: Story<UserOverviewProps> = (args) => {
 export const Default = Template.bind({})
 
 Default.args = {
-    avatarUrl: 'https://avatars.githubusercontent.com/u/56519760?v=4',
-    username: 'bennihz',
-    bio: 'CS undergraduate at TUM',
-    profileUrl: 'https://github.com/bennihz',
-    location: 'Munich, Germany',
+    userInfo: {
+        avatarUrl: 'https://avatars.githubusercontent.com/u/56519760?v=4',
+        login: 'bennihz',
+        bio: 'CS undergraduate at TUM',
+        htmlUrl: 'https://github.com/bennihz',
+        location: 'Munich, Germany',
+        name: 'Benjamin H.',
+    },
 }

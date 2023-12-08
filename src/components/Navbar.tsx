@@ -4,7 +4,6 @@ import logoSrcDark from '../logotrans-dark.png'
 import darkmodeIcon from '../darkmode.png'
 import lightmodeIcon from '../lightmode.png'
 
-
 export interface NavbarProps {
     darkMode: boolean
     onDarkModeToggle: () => void

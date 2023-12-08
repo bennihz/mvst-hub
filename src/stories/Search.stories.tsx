@@ -17,7 +17,13 @@ const Template: Story = (args) => {
         setValue(e.target.value)
     }
 
-    return <Search onSearch={args.onSearch} placeholder="Search here" />
+    return (
+        <Search
+            onSearch={args.onSearch}
+            placeholder="Search here"
+            disabled={false}
+        />
+    )
 }
 
 export const Default = Template.bind({})

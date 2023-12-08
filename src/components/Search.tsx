@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 export interface SearchRepoProps {
     onSearch: (text: string) => void
     placeholder: string
+    disabled: boolean
 }
 
 /**
@@ -10,7 +11,11 @@ export interface SearchRepoProps {
  * @param onSearch - The function to call when the search input changes
  * @param placeholder - The placeholder text
  */
-const Search: React.FC<SearchRepoProps> = ({ onSearch, placeholder }) => {
+const Search: React.FC<SearchRepoProps> = ({
+    onSearch,
+    placeholder,
+    disabled,
+}) => {
     const [text, setText] = useState<string>('')
 
     /**
@@ -27,8 +32,16 @@ const Search: React.FC<SearchRepoProps> = ({ onSearch, placeholder }) => {
                     type="text"
                     name="id-b16"
                     placeholder={placeholder}
-                    className="relative w-full h-10 px-4 pr-12 text-sm transition-all border rounded outline-none peer border-slate-300 text-slate-600 autofill:bg-white  invalid:border-pink-500 invalid:text-pink-500 focus:border-stone-400 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400 bg-white dark:bg-zinc-900 dark:border-gray-700 dark:focus:border-sky-700 dark:text-w"
+                    className="relative w-full h-10 px-4 pr-12 text-sm transition-all border rounded outline-none peer
+                    border-slate-300 text-slate-600 autofill:bg-white  invalid:border-pink-500 invalid:text-pink-500
+                    focus:border-stone-400 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none
+                    disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400 bg-white
+                    dark:bg-zinc-900 dark:border-gray-700 dark:focus:border-sky-700 dark:text-w
+                    dark:disabled:bg-zinc-950 dark:disabled:text-zinc-400 dark:placeholder-gray-500 dark:peer-disabled:bg-zinc-950 dark:peer-disabled:text-zinc-400
+
+                    "
                     onChange={(e) => setText(e.target.value)}
+                    disabled={disabled}
                 />
                 <svg
                     xmlns="http://www.w3.org/2000/svg"

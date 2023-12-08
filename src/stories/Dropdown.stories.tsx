@@ -27,6 +27,7 @@ const Template: Story = (args) => {
             {...args}
             navigationItems={navigationItems}
             onChange={handleRepoLangFilter}
+            disabled={false}
         />
     )
 }

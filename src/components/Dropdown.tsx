@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useRef, KeyboardEvent } from 'react'
 
-export default function Dropdown(props: {
+export interface DropdownProps {
     navigationItems: { linkName: string }[]
     onChange: (item: string) => void
-}) {
+    disabled: boolean
+}
+
+export default function Dropdown(props: DropdownProps) {
     const [isOpen, setIsOpen] = useState(false)
     const [currentItem, setCurrentItem] = useState<number | null>(null)
     const wrapperRef = useRef(null)
@@ -104,10 +107,14 @@ export default function Dropdown(props: {
                 rounded bg-w dark:bg-zinc-900 px-5 text-sm text-gray-600 tracking-wide transition
                 duration-300 hover:bg-zinc-100 focus-visible:outline-none
                 disabled:cursor-not-allowed disabled:border-emerald-300 disabled:bg-emerald-300 border focus:bg-white dark:focus:bg-zinc-800
-                disabled:shadow-none  dark:text-gray-400 dark:border-gray-700 dark:focus:bg-zinc-900 dark:focus:border-sky-700 dark:focus:border-2 dark:hover:bg-zinc-900 dark:hover:text-gray-400 dark:hover:border-gray-700 dark:disabled:bg-gray-700 dark:disabled:text-gray-400 dark:disabled:border-gray-700 dark:disabled:cursor-not-allowed dark:disabled:shadow-none"
+                disabled:shadow-none  dark:text-gray-400 dark:border-gray-700 dark:focus:bg-zinc-900 dark:focus:border-sky-700
+                dark:focus:border-2 dark:hover:bg-zinc-900 dark:hover:text-gray-400 dark:hover:border-gray-700
+                dark:disabled:bg-zinc-950 dark:disabled:text-zinc-400 dark:disabled:border-gray-700
+                dark:disabled:cursor-not-allowed dark:disabled:shadow-none"
                 onClick={() => setIsOpen(!isOpen)}
                 aria-expanded={isOpen}
                 ref={wrapperRef}
+                disabled={props.disabled}
             >
                 <span className="sm:inline">
                     {currentItem !== null
