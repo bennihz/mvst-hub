@@ -21,7 +21,7 @@ const Pagination: React.FC<PaginationProps> = ({
         <>
             {/*<!-- Component: Minimal outline pagination with icons and text --> */}
             <nav role="navigation" aria-label="Pagination Navigation">
-                <ul className="flex list-none items-center justify-center divide-x divide-slate-200 dark:divide-neutral-900 overflow-hidden text-sm text-slate-700">
+                <ul className="flex list-none items-center justify-center divide-x divide-slate-200 dark:divide-neutral-900 overflow-hidden text-sm text-slate-700 transition-colors duration-300">
                     <li>
                         <button
                             aria-label="Goto Previous Page"

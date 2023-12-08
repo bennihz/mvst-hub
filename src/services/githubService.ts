@@ -61,7 +61,6 @@ export const getUserReposLimited = async (
         body: JSON.stringify({ query, variables }),
     })
 
-
     if (!response.ok) {
         throw new Error('Failed to fetch user repositories')
     }

@@ -18,7 +18,7 @@ const UserOverview: React.FC<UserOverviewProps> = (UserOverviewProps) => {
         UserOverviewProps.userInfo
 
     return (
-        <div className="flex flex-row md:flex-col items-start p-4 border border-neutral-300 rounded-md bg-w dark:bg-zinc-900 dark:border-neutral-800">
+        <div className="flex flex-row md:flex-col items-start p-4 border border-neutral-300 rounded-md bg-w dark:bg-zinc-900 dark:border-neutral-800 transition-colors duration-300">
             <>
                 <div className="mb-2 md:mb-4 w-1/3 md:w-full">
                     <img

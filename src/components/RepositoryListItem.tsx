@@ -25,7 +25,7 @@ const RepositoryListItem: React.FC<RepositoryListItemProps> = ({
     return (
         <>
             {isLoading ? (
-                <li className="border border-neurtal-300 p-4 mb-4 rounded flex items-start justify-start list-none bg-white dark:bg-zinc-900 dark:border-neutral-800">
+                <li className="border border-neurtal-300 p-4 mb-4 rounded flex items-start justify-start list-none bg-white dark:bg-zinc-900 dark:border-neutral-800 transition-colors duration-300">
                     <ContentLoader
                         speed={0.5}
                         height={60}

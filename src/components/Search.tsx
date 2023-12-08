@@ -37,7 +37,7 @@ const Search: React.FC<SearchRepoProps> = ({
                     focus:border-stone-400 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none
                     disabled:cursor-not-allowed disabled:test-stone-400 bg-white
                     dark:bg-zinc-900 dark:border-gray-700 dark:focus:border-sky-700 dark:text-w
-                    disabled:bg-stone-50
+                    disabled:bg-stone-50 transition-colors duration-300
                     dark:disabled:bg-zinc-950 dark:disabled:text-zinc-400 dark:placeholder-gray-500 dark:peer-disabled:bg-zinc-950 dark:peer-disabled:text-zinc-400
 
                     "

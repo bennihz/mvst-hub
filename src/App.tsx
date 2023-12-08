@@ -242,7 +242,7 @@ const App: React.FC = () => {
             />
 
             <div
-                className={`bg-white dark:bg-zinc-900 ${
+                className={`bg-white dark:bg-zinc-900 transition-colors duration-300 ${
                     darkMode ? 'dark' : ''
                 }`}
                 style={{
@@ -251,7 +251,7 @@ const App: React.FC = () => {
                 }}
             >
                 <div className={`container mx-auto p-4`}>
-                    <h1 className="text-4xl font-bold mb-4 dark:text-zinc-50">
+                    <h1 className="text-4xl font-bold mb-4 dark:text-zinc-50 transition-colors duration-300">
                         Home
                     </h1>
                     <SearchBarBig onSearch={handleUserSearch} />
