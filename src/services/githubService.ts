@@ -1,4 +1,4 @@
-import { UserInfo } from '../types/global'
+import { Repository, UserInfo } from '../types/global'
 
 const BASE_URL = 'https://mvst-hub-proxy.onrender.com'
 
@@ -61,11 +61,14 @@ export const getUserReposLimited = async (
         body: JSON.stringify({ query, variables }),
     })
 
+
     if (!response.ok) {
         throw new Error('Failed to fetch user repositories')
     }
 
     const data = await response.json()
+
+    console.log(data)
 
     const repositories = data?.data?.user?.repositories?.nodes || []
     const hasNextPage =
@@ -84,7 +87,7 @@ export const getUserReposAll = async (
 ): Promise<getUserReposResponse> => {
     let hasNextPage = true
     let endCursor = null
-    let allRepositories: any[] = []
+    let allRepositories: Repository[] = []
 
     while (hasNextPage) {
         const query = `
@@ -132,6 +135,13 @@ export const getUserReposAll = async (
 
         const data = await response.json()
         const repositories = data?.data?.user?.repositories?.nodes || []
+
+        // if a repository has no primary language, it will be null, so we insert an empty object with name = 'not specified'
+        repositories.forEach((repo: any) => {
+            if (repo.primaryLanguage === null) {
+                repo.primaryLanguage = { name: 'not specified' }
+            }
+        })
 
         allRepositories = [...allRepositories, ...repositories]
         const pageInfo = data?.data?.user?.repositories?.pageInfo

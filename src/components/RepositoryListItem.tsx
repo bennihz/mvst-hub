@@ -65,7 +65,7 @@ const RepositoryListItem: React.FC<RepositoryListItemProps> = ({
                         {name ?? 'No Name'}
                     </h3>
                     <p className="text-gray-600 mb-2 dark:text-gray-500">
-                        {primaryLanguage?.name ?? 'Language not specified'}
+                        {primaryLanguage?.name ?? 'not specified'}
                     </p>
                     <p className="text-gray-500 text-sm">
                         {description ?? 'No description'}

@@ -15,7 +15,7 @@ const SearchBarBig: React.FC<SearchBarBigProps> = ({ onSearch }) => {
      * Update the search text when the input changes
      */
     const handleSearch = () => {
-        if (username.trim() !== '') {
+        if (username.trim()) {
             onSearch(username)
         }
     }
