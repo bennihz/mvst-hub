@@ -192,9 +192,11 @@ const App: React.FC = () => {
      * Handle user search
      */
     const handleUserSearch = (text: string) => {
-        if (text.trim() === '') {
+        // if text is the same as username do nothing
+        if (text.trim() === username) {
             return
         }
+
         setUsername(text)
         setPage(0)
         setHasNextPage(false)
