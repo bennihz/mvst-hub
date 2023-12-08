@@ -1,46 +1,46 @@
-# Getting Started with Create React App
+# MVST Hub - github repo searcher
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+MVST Hub is a React TypeScript application developed within a week to address a coding challenge. Here's an overview of the project and its key features:
 
-## Available Scripts
+## Rapid Development Highlights
 
-In the project directory, you can run:
+- **Deployment Efficiency:** Explore the live application on [Render](https://mvst-hub.onrender.com/).
 
-### `npm start`
+- **GitHub API Integration:** Utilized the GitHub v4 API with a proxy at [mvst-hub-proxy.onrender.com](https://mvst-hub-proxy.onrender.com/) to safeguard the personal access token in the frontend.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **Client-Side Pagination Strategy:** Overcame limitations in GitHub's v4 GraphQL API by implementing client-side pagination. Repositories are asynchronously fetched, enabling an early display of initial results.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- **Tailwind CSS Styling:** The project embraces Tailwind CSS for styling, with select components adapted from Wind-UI, a Tailwind component library.
 
-### `npm test`
+- **User Information Display:** Beyond repositories, MVST Hub showcases user information for a comprehensive user experience.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Theme Preferences:** Users have the flexibility to choose between light and dark themes. A manual switch in the navbar allows for real-time theme changes.
 
-### `npm run build`
+- **Storybook Component Exploration:** Developers can leverage Storybook to view components independently. Execute `npm run storybook` to initiate Storybook while concurrently updating Tailwind CSS.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Getting Started Locally
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. **Clone & Install:**
+    ```bash
+    git clone https://github.com/bennihz/mvst-hub.git
+    cd mvst-hub
+    npm install
+    ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. **Run the Application:**
+    ```bash
+    npm start
+    ```
 
-### `npm run eject`
+3. **Local Exploration:**
+    Open [http://localhost:3000](http://localhost:3000) in your browser to explore the application locally.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Future Development Opportunities
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+While the initial version was developed swiftly, there are areas for future improvement:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- **Test Implementation:** Enhance the project's reliability by adding a comprehensive test suite.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- **Code Refactoring:** Consider refining the code structure by implementing low coupling and high cohesion. This could involve separating and creating hooks from the `App.tsx` file.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **Detailed Repository View:** Explore the possibility of implementing a detailed view for repositories, offering users more in-depth information upon clicking a repository in the list.
