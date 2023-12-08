@@ -86,6 +86,8 @@ const App: React.FC = () => {
         try {
             setUserLoading(true)
             const userData = await getUserInfo(username)
+
+            // If the user data is null, the user was not found
             if (userData === null) {
                 setUserNotFound(true)
                 setUserInfo(null)
@@ -93,6 +95,7 @@ const App: React.FC = () => {
                 setUserLoading(false)
                 return
             } else {
+                // If the user was found, reset the user not found state
                 setUserNotFound(false)
                 setUserInfo(userData)
             }
@@ -256,7 +259,9 @@ const App: React.FC = () => {
                     <h1 className="text-4xl font-bold mb-4 dark:text-zinc-50 transition-colors duration-300">
                         Home
                     </h1>
-                    <SearchBarBig onSearch={handleUserSearch} />
+                    <div className={"mt-4 md:mb-4 " + (username !== "" ? "mb-4" : "")}>
+                        <SearchBarBig onSearch={handleUserSearch} />
+                    </div>
 
                     <div className="container flex flex-col md:flex-row md:gap-4 ">
                         {userLoading ? (

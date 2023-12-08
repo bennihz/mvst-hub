@@ -31,7 +31,7 @@ const SearchBarBig: React.FC<SearchBarBigProps> = ({ onSearch }) => {
 
     return (
         <>
-            <div className="relative my-4">
+            <div className={"relative"}>
                 <input
                     type="text"
                     placeholder="Search for a GitHub-user"
