@@ -5,29 +5,33 @@ import { Repository } from '../types/global'
 export interface RepositoryListItemProps {
     repository?: Repository
     isLoading: boolean
+    // darkMode: boolean only used for contentloader
+    darkMode: boolean
 }
 
 /**
  * A component to display a repository list item
  * @param repository - The repository to display
  * @param isLoading - Whether the repository is loading
+ * @param darkMode - Whether dark mode is enabled
  */
 const RepositoryListItem: React.FC<RepositoryListItemProps> = ({
     repository = {},
     isLoading,
+    darkMode,
 }) => {
     const { name, primaryLanguage, description } = repository
 
     return (
         <>
             {isLoading ? (
-                <li className="border border-neurtal-300 p-4 mb-4 rounded flex items-start justify-start list-none bg-white dark:bg-zinc-900">
+                <li className="border border-neurtal-300 p-4 mb-4 rounded flex items-start justify-start list-none bg-white dark:bg-zinc-900 dark:border-neutral-800">
                     <ContentLoader
                         speed={0.5}
                         height={60}
                         viewBox="0 0 400 60"
-                        backgroundColor="#e1e1e1"
-                        foregroundColor="#f2f2f2"
+                        backgroundColor={darkMode ? '#52525B' : '#f2f2f2'}
+                        foregroundColor={darkMode ? '#A3A3A3' : '#f2f2f2'}
                     >
                         <rect
                             x="0"

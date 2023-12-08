@@ -62,6 +62,7 @@ const Template: Story = (args) => {
             {...args}
             repositories={repositories}
             isLoading={false}
+            darkMode={false}
         />
     )
 }

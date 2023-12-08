@@ -287,6 +287,7 @@ const App: React.FC = () => {
                                         <RepositoryList
                                             repositories={displayedRepositories}
                                             isLoading={reposLoading}
+                                            darkMode={darkMode}
                                         />
                                         {error && <Error message={error} />}
                                         {filteredRepositories.length > 0 && (

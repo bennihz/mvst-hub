@@ -6,6 +6,7 @@ import NoRepositoriesFound from './NoRepositoriesFound'
 export interface RepositoryListProps {
     repositories: Repository[]
     isLoading: boolean
+    darkMode: boolean
 }
 
 /**
@@ -13,10 +14,12 @@ export interface RepositoryListProps {
  * @param repositories - The repositories to display
  * @param isLoading - Whether the repositories are loading
  * @param page - The current page
+ * @param darkMode - Whether dark mode is enabled
  */
 const RepositoryList: React.FC<RepositoryListProps> = ({
     repositories,
     isLoading,
+    darkMode,
 }) => {
     return (
         <div>
@@ -32,6 +35,7 @@ const RepositoryList: React.FC<RepositoryListProps> = ({
                                 primaryLanguage: { name: '' },
                                 description: '',
                             }}
+                            darkMode={darkMode}
                         />
                     ))}
                 </ul>
@@ -44,6 +48,7 @@ const RepositoryList: React.FC<RepositoryListProps> = ({
                             key={repo.id}
                             repository={repo}
                             isLoading={false}
+                            darkMode={darkMode}
                         />
                     ))}
                 </ul>
