@@ -1,235 +1,192 @@
 // app.tsx
-import React, { useState, useEffect } from 'react'
-import RepositoryList from './components/RepositoryList'
-import Error from './components/Error'
+import React, { useState, useEffect, useCallback } from 'react';
+import RepositoryList from './components/RepositoryList';
+import Error from './components/Error';
 import {
     getUserReposLimited,
     getUserInfo,
     getUserReposAll,
-} from './services/githubService'
-import Navbar from './components/Navbar'
-import SearchBarBig from './components/SearchBarBig'
-import UserOverview from './components/UserOverview'
-import Pagination from './components/Pagination'
-import Search from './components/Search'
-import Dropdown from './components/Dropdown'
+} from './services/githubService';
+import Navbar from './components/Navbar';
+import SearchBarBig from './components/SearchBarBig';
+import UserOverview from './components/UserOverview';
+import Pagination from './components/Pagination';
+import Search from './components/Search';
+import Dropdown from './components/Dropdown';
 
 const App: React.FC = () => {
-    const [reposLoading, setReposLoading] = useState<boolean>(false)
-    const [error, setError] = useState<string | null>(null)
-    const [username, setUsername] = useState<string>('')
-    const [userInfo, setUserInfo] = useState<any | null>(null)
-    const [userNotFound, setUserNotFound] = useState<boolean>(false)
-    const [hasNextPage, setHasNextPage] = useState<boolean>(false)
-    const [hasPreviousPage, setHasPreviousPage] = useState<boolean>(false)
-    const [repoNameFilter, setRepoNameFilter] = useState<string>('')
-    const [repoLanguageFilter, setRepoLanguageFilter] = useState<string>('')
-    const [filteredRepositories, setFilteredRepositories] = useState<any[]>([])
-    const [allRepositories, setAllRepositories] = useState<any[]>([])
-    const [page, setPage] = useState<number>(0)
-    const [languages, setLanguages] = useState<any[]>([])
-    const [displayedRepositories, setDisplayedRepositories] = useState<any[]>(
-        [],
-    )
-
-    /**
-     * Set the theme to the user's preference
-     */
+    const [reposLoading, setReposLoading] = useState<boolean>(false);
+    const [error, setError] = useState<string | null>(null);
+    const [username, setUsername] = useState<string>('');
+    const [userInfo, setUserInfo] = useState<any | null>(null);
+    const [userNotFound, setUserNotFound] = useState<boolean>(false);
+    const [hasNextPage, setHasNextPage] = useState<boolean>(false);
+    const [hasPreviousPage, setHasPreviousPage] = useState<boolean>(false);
+    const [repoNameFilter, setRepoNameFilter] = useState<string>('');
+    const [repoLanguageFilter, setRepoLanguageFilter] = useState<string>('');
+    const [filteredRepositories, setFilteredRepositories] = useState<any[]>([]);
+    const [allRepositories, setAllRepositories] = useState<any[]>([]);
+    const [page, setPage] = useState<number>(0);
+    const [languages, setLanguages] = useState<any[]>([]);
+    const [displayedRepositories, setDisplayedRepositories] = useState<any[]>([]);
     const [darkMode, setDarkMode] = useState<boolean>(
         localStorage.theme === 'dark' ||
-            (!('theme' in localStorage) &&
-                window.matchMedia('(prefers-color-scheme: dark)').matches),
-    )
+        (!('theme' in localStorage) &&
+            window.matchMedia('(prefers-color-scheme: dark)').matches)
+    );
 
-    /**
-     * Set the theme to the user's preference
-     */
-    useEffect(() => {
-        document.documentElement.classList.toggle('dark', darkMode)
-        localStorage.theme = darkMode ? 'dark' : 'light'
-    }, [darkMode])
+    const fetchAllRepositories = useCallback(async () => {
+        try {
+            const allRepoData = await getUserReposAll(username);
+            setAllRepositories(allRepoData.repositories);
+            setReposLoading(false);
+            setError(null);
+        } catch (error) {
+            console.error('Error fetching all repositories', error);
+            setReposLoading(false);
+            setError('Error fetching all repositories.');
+        }
+    }, [username]);
 
-    /**
-     * Fetch all repositories and set languages
-     */
+    const fetchInitialRepositories = useCallback(async () => {
+        try {
+            setReposLoading(true);
+            await new Promise((resolve) => setTimeout(resolve, 200));
+
+            const initialRepoData = await getUserReposLimited(username, 10);
+            setDisplayedRepositories(initialRepoData.repositories);
+            setHasNextPage(initialRepoData.hasNextPage);
+
+            setReposLoading(false);
+
+            await fetchAllRepositories();
+
+            setError(null);
+        } catch (error) {
+            console.error('Error fetching data', error);
+            setReposLoading(false);
+            setError('Error fetching data.');
+        }
+    }, [username, fetchAllRepositories]);
+
+    const fetchUser = useCallback(async () => {
+        try {
+            const userData = await getUserInfo(username);
+            if (userData === null) {
+                setUserNotFound(true);
+                setUserInfo(null);
+                setAllRepositories([]);
+                return;
+            } else {
+                setUserNotFound(false);
+                setUserInfo(userData);
+            }
+            setError(null);
+        } catch (error) {
+            console.error('Error fetching data', error);
+            setError('Error fetching data.');
+        }
+    }, [username]);
+
     useEffect(() => {
-        setFilteredRepositories(allRepositories)
-        const languagesSet = new Set()
+        setUserInfo(null);
+        if (username.trim() !== '') {
+            fetchUser();
+            fetchInitialRepositories();
+        }
+        setRepoNameFilter('');
+        setRepoLanguageFilter('');
+    }, [username, fetchUser, fetchInitialRepositories]);
+
+    useEffect(() => {
+        setFilteredRepositories(allRepositories);
+        const languagesSet = new Set();
         allRepositories.forEach((repo) => {
             if (repo.primaryLanguage) {
-                languagesSet.add(repo.primaryLanguage.name)
+                languagesSet.add(repo.primaryLanguage.name);
             }
-        })
+        });
         setLanguages(
             Array.from(languagesSet).map((language) => ({
                 linkName: language,
-            })),
-        )
-    }, [allRepositories])
+            }))
+        );
+    }, [allRepositories]);
 
-    /**
-     * Fetch all repositories
-     */
-    const fetchAllRepositories = async () => {
-        try {
-            const allRepoData = await getUserReposAll(username)
-            setAllRepositories(allRepoData.repositories)
-            setReposLoading(false)
-            setError(null)
-        } catch (error) {
-            console.error('Error fetching all repositories', error)
-            setReposLoading(false)
-            setError('Error fetching all repositories.')
-        }
-    }
-
-    /**
-     * Fetch initial repositories
-     */
-    const fetchInitialRepositories = async () => {
-        try {
-            setReposLoading(true)
-            await new Promise((resolve) => setTimeout(resolve, 200))
-
-            const initialRepoData = await getUserReposLimited(username, 10)
-            setDisplayedRepositories(initialRepoData.repositories)
-            setHasNextPage(initialRepoData.hasNextPage)
-
-            setReposLoading(false)
-
-            await fetchAllRepositories()
-
-            setError(null)
-        } catch (error) {
-            console.error('Error fetching data', error)
-            setReposLoading(false)
-            setError('Error fetching data.')
-        }
-    }
-
-    /**
-     * Fetch user info and initial repositories
-     */
     useEffect(() => {
-        setUserInfo(null)
-        if (username.trim() !== '') {
-            fetchUser()
-            fetchInitialRepositories()
-        }
-        setRepoNameFilter('')
-        setRepoLanguageFilter('')
-    }, [username])
+        document.documentElement.classList.toggle('dark', darkMode);
+        localStorage.theme = darkMode ? 'dark' : 'light';
+    }, [darkMode]);
 
-    /**
-     * Fetch user info
-     */
-    const fetchUser = async () => {
-        try {
-            const userData = await getUserInfo(username)
-            if (userData === null) {
-                setUserNotFound(true)
-                setUserInfo(null)
-                setAllRepositories([])
-
-                return
-            } else {
-                setUserNotFound(false)
-                setUserInfo(userData)
-            }
-            setError(null)
-        } catch (error) {
-            console.error('Error fetching data', error)
-            setError('Error fetching data.')
-        }
-    }
-
-    /**
-     * Handle page change
-     */
-    const handlePageChange = (pageChange: number) => {
-        const newPage = page + pageChange
-
-        setHasPreviousPage(newPage > 0)
-        setHasNextPage(filteredRepositories.length > (newPage + 1) * 10)
-
-        const startIndex = newPage * 10
-        const endIndex = startIndex + 10
-        const filteredRepos = filteredRepositories
-            .slice(startIndex, endIndex)
-            .filter((repo) =>
-                repo.name.toLowerCase().includes(repoNameFilter.toLowerCase()),
-            )
-            .filter(
-                (repo) =>
-                    repo.primaryLanguage?.name
-                        ?.toLowerCase()
-                        .includes(repoLanguageFilter.toLowerCase()),
-            )
-
-        setDisplayedRepositories(filteredRepos)
-        setPage(newPage)
-    }
-
-    /**
-     * Filter repositories by name and language
-     */
     useEffect(() => {
         const filtered = allRepositories
             .filter((repo) =>
-                repo.name.toLowerCase().includes(repoNameFilter.toLowerCase()),
+                repo.name.toLowerCase().includes(repoNameFilter.toLowerCase())
             )
             .filter(
                 (repo) =>
                     repo.primaryLanguage?.name
                         ?.toLowerCase()
-                        .includes(repoLanguageFilter.toLowerCase()),
-            )
-        setFilteredRepositories(filtered)
-    }, [repoNameFilter, repoLanguageFilter])
+                        .includes(repoLanguageFilter.toLowerCase())
+            );
+        setFilteredRepositories(filtered);
+    }, [repoNameFilter, repoLanguageFilter, allRepositories]);
 
-    /**
-     * Handle user search
-     */
+    const handlePageChange = (pageChange: number) => {
+        const newPage = page + pageChange;
+
+        setHasPreviousPage(newPage > 0);
+        setHasNextPage(filteredRepositories.length > (newPage + 1) * 10);
+
+        const startIndex = newPage * 10;
+        const endIndex = startIndex + 10;
+        const filteredRepos = filteredRepositories
+            .slice(startIndex, endIndex)
+            .filter((repo) =>
+                repo.name.toLowerCase().includes(repoNameFilter.toLowerCase())
+            )
+            .filter(
+                (repo) =>
+                    repo.primaryLanguage?.name
+                        ?.toLowerCase()
+                        .includes(repoLanguageFilter.toLowerCase())
+            );
+
+        setDisplayedRepositories(filteredRepos);
+        setPage(newPage);
+    };
+
     const handleUserSearch = (text: string) => {
         if (text.trim() === '') {
-            return
+            return;
         }
-        setUsername(text)
-        setPage(0)
-        setHasNextPage(false)
-        setHasNextPage(false)
-        setFilteredRepositories([])
-        setAllRepositories([])
-        setDisplayedRepositories([])
-    }
+        setUsername(text);
+        setPage(0);
+        setHasNextPage(false);
+        setHasNextPage(false);
+        setFilteredRepositories([]);
+        setAllRepositories([]);
+        setDisplayedRepositories([]);
+    };
 
-    /**
-     * Handle filter by repository name
-     */
     useEffect(() => {
-        setDisplayedRepositories(filteredRepositories.slice(0, 10))
-        setPage(0)
-        setHasPreviousPage(false)
+        setDisplayedRepositories(filteredRepositories.slice(0, 10));
+        setPage(0);
+        setHasPreviousPage(false);
         if (filteredRepositories.length > 10) {
-            setHasNextPage(true)
+            setHasNextPage(true);
         } else {
-            setHasNextPage(false)
+            setHasNextPage(false);
         }
-    }, [filteredRepositories])
+    }, [filteredRepositories]);
 
-    /**
-     * Handle filter by repository language
-     */
     const handleRepoNameFilter = (text: string) => {
-        setRepoNameFilter(text)
-    }
+        setRepoNameFilter(text);
+    };
 
-    /**
-     * Handle filter by repository language
-     */
     const handleRepoLangFilter = (text: string) => {
-        setRepoLanguageFilter(text)
-    }
+        setRepoLanguageFilter(text);
+    };
 
     return (
         <>
@@ -238,7 +195,6 @@ const App: React.FC = () => {
                 onDarkModeToggle={() => setDarkMode(!darkMode)}
             />
 
-            {/* Set background color and height for the entire screen */}
             <div
                 className={`bg-white dark:bg-zinc-900 ${
                     darkMode ? 'dark' : ''
@@ -310,7 +266,7 @@ const App: React.FC = () => {
                 </div>
             </div>
         </>
-    )
-}
+    );
+};
 
-export default App
+export default App;
