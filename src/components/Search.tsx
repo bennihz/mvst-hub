@@ -1,29 +1,29 @@
 import React, { useState, useEffect } from 'react'
 
 export interface SearchRepoProps {
+    username: string
     onSearch: (text: string) => void
     placeholder: string
     disabled: boolean
 }
 
-/**
- * A component to display a search input
- * @param onSearch - The function to call when the search input changes
- * @param placeholder - The placeholder text
- */
 const Search: React.FC<SearchRepoProps> = ({
+    username,
     onSearch,
     placeholder,
     disabled,
 }) => {
     const [text, setText] = useState<string>('')
 
-    /**
-     * Update the search text when the input changes
-     */
+    // Reset text and call onSearch when the username changes
+    useEffect(() => {
+        setText('')
+    }, [username])
+
+    // Update the search text when the input changes
     useEffect(() => {
         onSearch(text)
-    }, [text])
+    }, [text, onSearch])
 
     return (
         <>
@@ -32,15 +32,14 @@ const Search: React.FC<SearchRepoProps> = ({
                     type="text"
                     name="id-b16"
                     placeholder={placeholder}
+                    value={text}
                     className="relative w-full h-10 px-4 pr-12 text-sm transition-all border rounded outline-none peer
                     border-slate-300 text-slate-600 autofill:bg-white  invalid:border-pink-500 invalid:text-pink-500
                     focus:border-stone-400 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none
                     disabled:cursor-not-allowed disabled:test-stone-400 bg-white
                     dark:bg-zinc-900 dark:border-gray-700 dark:focus:border-sky-700 dark:text-w
                     disabled:bg-stone-50 transition-colors duration-300
-                    dark:disabled:bg-zinc-950 dark:disabled:text-zinc-400 dark:placeholder-gray-500 dark:peer-disabled:bg-zinc-950 dark:peer-disabled:text-zinc-400
-
-                    "
+                    dark:disabled:bg-zinc-950 dark:disabled:text-zinc-400 dark:placeholder-gray-500 dark:peer-disabled:bg-zinc-950 dark:peer-disabled:text-zinc-400"
                     onChange={(e) => setText(e.target.value)}
                     disabled={disabled}
                 />

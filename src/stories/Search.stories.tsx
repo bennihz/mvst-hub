@@ -22,6 +22,7 @@ const Template: Story = (args) => {
             onSearch={args.onSearch}
             placeholder="Search here"
             disabled={false}
+            username="username"
         />
     )
 }

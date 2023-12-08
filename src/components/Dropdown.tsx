@@ -13,6 +13,13 @@ export default function Dropdown(props: DropdownProps) {
     const { navigationItems } = props
 
     /**
+     * Reset the current item when the navigation items change
+     */
+    useEffect(() => {
+        setCurrentItem(null)
+    }, [navigationItems])
+
+    /**
      * Update the current item when the dropdown is opened
      */
     useEffect(() => {

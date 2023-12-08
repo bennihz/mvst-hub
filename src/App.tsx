@@ -199,6 +199,8 @@ const App: React.FC = () => {
 
         setUsername(text)
         setPage(0)
+        setRepoNameFilter('')
+        setRepoLanguageFilter('')
         setHasNextPage(false)
         setHasNextPage(false)
         setFilteredRepositories([])
@@ -279,6 +281,7 @@ const App: React.FC = () => {
                             <div className="flex flex-col w-full sm:flex-row sm:gap-4">
                                 <div className="mb-4 w-full sm:w-3/5">
                                     <Search
+                                        username={username}
                                         onSearch={handleRepoNameFilter}
                                         placeholder="Search for Repository"
                                         disabled={reposLoading || !userInfo}
