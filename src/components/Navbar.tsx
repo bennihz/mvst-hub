@@ -1,12 +1,12 @@
-import React from 'react'
-import logoSrc from '../logotrans.png'
-import logoSrcDark from '../logotrans-dark.png'
-import darkmodeIcon from '../darkmode.png'
-import lightmodeIcon from '../lightmode.png'
+import React from 'react';
+import logoSrc from '../logotrans.png';
+import logoSrcDark from '../logotrans-dark.png';
+import darkmodeIcon from '../darkmode.png';
+import lightmodeIcon from '../lightmode.png';
 
 export interface NavbarProps {
-    darkMode: boolean
-    onDarkModeToggle: () => void
+    darkMode: boolean;
+    onDarkModeToggle: () => void;
 }
 
 /**
@@ -27,7 +27,8 @@ export default function Navbar({ darkMode, onDarkModeToggle }: NavbarProps) {
                 <div className="relative mx-auto max-w-full px-6 lg:max-w-5xl xl:max-w-7xl 2xl:max-w-[96rem]">
                     <nav
                         aria-label="main navigation"
-                        className="flex h-[5.5rem] items-stretch justify-between font-medium text-slate-700 dark:text-slate-300"
+                        className="flex h-[5.5rem] items-stretch justify-between font-medium text-slate-700 dark:text-slate-300
+                                   lg:px-20 xl:px-32 2xl:px-64" // Adjusted padding for large screens
                         role="navigation"
                     >
                         <a
@@ -62,5 +63,5 @@ export default function Navbar({ darkMode, onDarkModeToggle }: NavbarProps) {
                 </div>
             </header>
         </>
-    )
+    );
 }

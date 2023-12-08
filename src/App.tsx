@@ -255,7 +255,7 @@ const App: React.FC = () => {
                     minHeight: '100vh',
                 }}
             >
-                <div className={`container mx-auto p-4`}>
+                <div className={`container mx-auto p-4 lg:px-20 xl:px-32 2xl:px-64`}>
                     <h1 className="text-4xl font-bold mb-4 dark:text-zinc-50 transition-colors duration-300">
                         Home
                     </h1>
