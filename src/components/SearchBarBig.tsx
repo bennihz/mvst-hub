@@ -35,8 +35,8 @@ const SearchBarBig: React.FC<SearchBarBigProps> = ({ onSearch }) => {
                 <input
                     type="text"
                     placeholder="Search for a GitHub-user"
-                    className="relative w-full h-12 px-4 pr-12 transition-all border rounded outline-none peer border-neutral-300
-                    text-slate-600 autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-2 focus:outline-none
+                    className="relative w-full h-12 px-4 pr-12 border rounded outline-none peer border-neutral-300
+                    text-slate-600 autofill:bg-white invalid:border-pink-500 invalid:text-pink-500  focus:outline-none focus:border-stone-400
                     focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-500 bg-white dark:bg-zinc-900 dark:border-gray-700 dark:focus:border-sky-700 dark:text-w"
                     onChange={(e) => setUsername(e.target.value)}
                     onKeyPress={handleKeyPress}

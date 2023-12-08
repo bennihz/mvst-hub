@@ -106,8 +106,10 @@ export default function Dropdown(props: DropdownProps) {
                 className="inline-flex w-full h-10 items-center justify-center gap-2 whitespace-nowrap
                 rounded bg-w dark:bg-zinc-900 px-5 text-sm text-gray-600 tracking-wide transition
                 duration-300 hover:bg-zinc-100 focus-visible:outline-none
-                disabled:cursor-not-allowed disabled:border-emerald-300 disabled:bg-emerald-300 border focus:bg-white dark:focus:bg-zinc-800
+                disabled:cursor-not-allowed disabled:border-gray-300 disabled:bg-stone-50 disabled:text-gray-400
+                 border border-slate-300 focus:bg-white dark:focus:bg-zinc-800
                 disabled:shadow-none  dark:text-gray-400 dark:border-gray-700 dark:focus:bg-zinc-900 dark:focus:border-sky-700
+                focus:border-stone-400
                 dark:focus:border-2 dark:hover:bg-zinc-900 dark:hover:text-gray-400 dark:hover:border-gray-700
                 dark:disabled:bg-zinc-950 dark:disabled:text-zinc-400 dark:disabled:border-gray-700
                 dark:disabled:cursor-not-allowed dark:disabled:shadow-none"
