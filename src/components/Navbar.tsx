@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import logoSrc from '../logotrans.png'
 import logoSrcDark from '../logotrans-dark.png'
 import darkmodeIcon from '../darkmode.png'

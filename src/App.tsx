@@ -1,4 +1,3 @@
-// app.tsx
 import React, { useState, useEffect, useCallback } from 'react';
 import RepositoryList from './components/RepositoryList';
 import Error from './components/Error';
@@ -35,6 +34,9 @@ const App: React.FC = () => {
             window.matchMedia('(prefers-color-scheme: dark)').matches)
     );
 
+    /**
+     * Fetch all repositories for the user
+     */
     const fetchAllRepositories = useCallback(async () => {
         try {
             const allRepoData = await getUserReposAll(username);
@@ -48,11 +50,17 @@ const App: React.FC = () => {
         }
     }, [username]);
 
+    /**
+     * Fetch the initial repositories for the user
+     */
     const fetchInitialRepositories = useCallback(async () => {
         try {
             setReposLoading(true);
+
+            // Wait 200ms to prevent the loading indicator from flashing
             await new Promise((resolve) => setTimeout(resolve, 200));
 
+            // Fetch the first 10 repositories
             const initialRepoData = await getUserReposLimited(username, 10);
             setDisplayedRepositories(initialRepoData.repositories);
             setHasNextPage(initialRepoData.hasNextPage);
@@ -69,6 +77,9 @@ const App: React.FC = () => {
         }
     }, [username, fetchAllRepositories]);
 
+    /**
+     * Fetch the user info
+     */
     const fetchUser = useCallback(async () => {
         try {
             const userData = await getUserInfo(username);
@@ -88,6 +99,9 @@ const App: React.FC = () => {
         }
     }, [username]);
 
+    /**
+     * Fetch the next page of repositories
+     */
     useEffect(() => {
         setUserInfo(null);
         if (username.trim() !== '') {
@@ -98,6 +112,9 @@ const App: React.FC = () => {
         setRepoLanguageFilter('');
     }, [username, fetchUser, fetchInitialRepositories]);
 
+    /**
+     * Fetch all repositories when the user changes
+     */
     useEffect(() => {
         setFilteredRepositories(allRepositories);
         const languagesSet = new Set();
@@ -113,11 +130,17 @@ const App: React.FC = () => {
         );
     }, [allRepositories]);
 
+    /**
+     * set the dark mode class on the html element
+     */
     useEffect(() => {
         document.documentElement.classList.toggle('dark', darkMode);
         localStorage.theme = darkMode ? 'dark' : 'light';
     }, [darkMode]);
 
+    /**
+     * Filter the repositories based on the name and language filters
+     */
     useEffect(() => {
         const filtered = allRepositories
             .filter((repo) =>
@@ -132,6 +155,9 @@ const App: React.FC = () => {
         setFilteredRepositories(filtered);
     }, [repoNameFilter, repoLanguageFilter, allRepositories]);
 
+    /**
+     * Handle page change
+     */
     const handlePageChange = (pageChange: number) => {
         const newPage = page + pageChange;
 
@@ -156,6 +182,9 @@ const App: React.FC = () => {
         setPage(newPage);
     };
 
+    /**
+     * Handle user search
+     */
     const handleUserSearch = (text: string) => {
         if (text.trim() === '') {
             return;
@@ -169,6 +198,9 @@ const App: React.FC = () => {
         setDisplayedRepositories([]);
     };
 
+    /**
+     * Handle repo name filter
+     */
     useEffect(() => {
         setDisplayedRepositories(filteredRepositories.slice(0, 10));
         setPage(0);
@@ -180,10 +212,16 @@ const App: React.FC = () => {
         }
     }, [filteredRepositories]);
 
+    /**
+     * Handle repo language filter
+     */
     const handleRepoNameFilter = (text: string) => {
         setRepoNameFilter(text);
     };
 
+    /**
+     * Handle repo language filter
+     */
     const handleRepoLangFilter = (text: string) => {
         setRepoLanguageFilter(text);
     };
