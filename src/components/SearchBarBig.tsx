@@ -4,15 +4,25 @@ export interface SearchBarBigProps {
     onSearch: (username: string) => void
 }
 
+/**
+ * A component to display a search input
+ * @param onSearch - The function to call when the search input changes
+ */
 const SearchBarBig: React.FC<SearchBarBigProps> = ({ onSearch }) => {
     const [username, setUsername] = useState<string>('')
 
+    /**
+     * Update the search text when the input changes
+     */
     const handleSearch = () => {
         if (username.trim() !== '') {
             onSearch(username)
         }
     }
 
+    /**
+     * Update the search text when the input changes
+     */
     const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
             handleSearch()

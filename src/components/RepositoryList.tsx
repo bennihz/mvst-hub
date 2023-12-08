@@ -1,18 +1,22 @@
 import React from 'react'
 import RepositoryListItem from './RepositoryListItem'
 import { Repository } from '../types/global'
-import NoRepositoriesFound from '../stories/NoRepositoriesFound'
+import NoRepositoriesFound from './NoRepositoriesFound'
 
 export interface RepositoryListProps {
     repositories: Repository[]
     isLoading: boolean
-    page: number
 }
 
+/**
+ * A component to display a list of repositories
+ * @param repositories - The repositories to display
+ * @param isLoading - Whether the repositories are loading
+ * @param page - The current page
+ */
 const RepositoryList: React.FC<RepositoryListProps> = ({
     repositories,
     isLoading,
-    page,
 }) => {
     return (
         <div>

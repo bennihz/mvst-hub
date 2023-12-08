@@ -26,22 +26,32 @@ const App: React.FC = () => {
     const [repoLanguageFilter, setRepoLanguageFilter] = useState<string>('')
     const [filteredRepositories, setFilteredRepositories] = useState<any[]>([])
     const [allRepositories, setAllRepositories] = useState<any[]>([])
+    const [page, setPage] = useState<number>(0)
+    const [languages, setLanguages] = useState<any[]>([])
     const [displayedRepositories, setDisplayedRepositories] = useState<any[]>(
         [],
     )
-    const [page, setPage] = useState<number>(0)
-    const [languages, setLanguages] = useState<any[]>([])
+
+    /**
+     * Set the theme to the user's preference
+     */
     const [darkMode, setDarkMode] = useState<boolean>(
         localStorage.theme === 'dark' ||
             (!('theme' in localStorage) &&
                 window.matchMedia('(prefers-color-scheme: dark)').matches),
     )
 
+    /**
+     * Set the theme to the user's preference
+     */
     useEffect(() => {
         document.documentElement.classList.toggle('dark', darkMode)
         localStorage.theme = darkMode ? 'dark' : 'light'
     }, [darkMode])
 
+    /**
+     * Fetch all repositories and set languages
+     */
     useEffect(() => {
         setFilteredRepositories(allRepositories)
         const languagesSet = new Set()
@@ -57,6 +67,9 @@ const App: React.FC = () => {
         )
     }, [allRepositories])
 
+    /**
+     * Fetch all repositories
+     */
     const fetchAllRepositories = async () => {
         try {
             const allRepoData = await getUserReposAll(username)
@@ -70,6 +83,9 @@ const App: React.FC = () => {
         }
     }
 
+    /**
+     * Fetch initial repositories
+     */
     const fetchInitialRepositories = async () => {
         try {
             setReposLoading(true)
@@ -91,6 +107,9 @@ const App: React.FC = () => {
         }
     }
 
+    /**
+     * Fetch user info and initial repositories
+     */
     useEffect(() => {
         setUserInfo(null)
         if (username.trim() !== '') {
@@ -101,6 +120,9 @@ const App: React.FC = () => {
         setRepoLanguageFilter('')
     }, [username])
 
+    /**
+     * Fetch user info
+     */
     const fetchUser = async () => {
         try {
             const userData = await getUserInfo(username)
@@ -121,6 +143,9 @@ const App: React.FC = () => {
         }
     }
 
+    /**
+     * Handle page change
+     */
     const handlePageChange = (pageChange: number) => {
         const newPage = page + pageChange
 
@@ -145,6 +170,9 @@ const App: React.FC = () => {
         setPage(newPage)
     }
 
+    /**
+     * Filter repositories by name and language
+     */
     useEffect(() => {
         const filtered = allRepositories
             .filter((repo) =>
@@ -159,6 +187,9 @@ const App: React.FC = () => {
         setFilteredRepositories(filtered)
     }, [repoNameFilter, repoLanguageFilter])
 
+    /**
+     * Handle user search
+     */
     const handleUserSearch = (text: string) => {
         if (text.trim() === '') {
             return
@@ -172,7 +203,9 @@ const App: React.FC = () => {
         setDisplayedRepositories([])
     }
 
-    // update displayed repositories when filtered repositories change
+    /**
+     * Handle filter by repository name
+     */
     useEffect(() => {
         setDisplayedRepositories(filteredRepositories.slice(0, 10))
         setPage(0)
@@ -184,10 +217,16 @@ const App: React.FC = () => {
         }
     }, [filteredRepositories])
 
+    /**
+     * Handle filter by repository language
+     */
     const handleRepoNameFilter = (text: string) => {
         setRepoNameFilter(text)
     }
 
+    /**
+     * Handle filter by repository language
+     */
     const handleRepoLangFilter = (text: string) => {
         setRepoLanguageFilter(text)
     }
@@ -254,7 +293,6 @@ const App: React.FC = () => {
                                         <RepositoryList
                                             repositories={displayedRepositories}
                                             isLoading={reposLoading}
-                                            page={page}
                                         />
                                         {error && <Error message={error} />}
                                         {filteredRepositories.length > 0 && (

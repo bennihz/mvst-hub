@@ -9,6 +9,12 @@ export interface getUserReposLimitedResponse {
     hasNextPage: boolean
 }
 
+/**
+ * Fetches the repositories of a GitHub user.
+ * @param username
+ * @param perPage
+ * @returns getUserReposLimitedResponse
+ */
 export const getUserReposLimited = async (
     username: string,
     perPage: number,
@@ -66,6 +72,11 @@ export const getUserReposLimited = async (
     return { repositories, hasNextPage }
 }
 
+/**
+ * Fetches the repositories of a GitHub user.
+ * @param username
+ * @returns getUserReposResponse
+ */
 export const getUserReposAll = async (
     username: string,
 ): Promise<getUserReposResponse> => {
@@ -137,6 +148,12 @@ interface GitHubUser {
     htmlUrl: string
 }
 
+/**
+ * Fetches the user information of a GitHub user.
+ * @param username
+ * @returns GitHubUser
+ * @returns null if the user does not exist
+ */
 export const getUserInfo = async (
     username: string,
 ): Promise<GitHubUser | null> => {

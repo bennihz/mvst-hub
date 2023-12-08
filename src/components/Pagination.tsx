@@ -6,6 +6,12 @@ export interface PaginationProps {
     onPageChange: (page: number) => void
 }
 
+/**
+ * A component to display pagination
+ * @param isFirstPage
+ * @param isLastPage
+ * @param onPageChang
+ */
 const Pagination: React.FC<PaginationProps> = ({
     isFirstPage,
     isLastPage,

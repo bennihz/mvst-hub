@@ -2,15 +2,7 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-/* Default background color */
 body {
     overflow-y: scroll;
     background-color: #f4f2ed;
-}
-
-/* Dark mode background color */
-@media (prefers-color-scheme: dark) {
-    body {
-        background-color: #000;
-    }
 }

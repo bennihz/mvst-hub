@@ -4,14 +4,18 @@ import logoSrcDark from '../logotrans-dark.png'
 import darkmodeIcon from '../darkmode.png'
 import lightmodeIcon from '../lightmode.png'
 
+
 export interface NavbarProps {
     darkMode: boolean
     onDarkModeToggle: () => void
 }
 
+/**
+ * A component to display a navbar
+ * @param darkMode - dark mode is enabled
+ * @param onDarkModeToggle - A function to toggle dark mode
+ */
 export default function Navbar({ darkMode, onDarkModeToggle }: NavbarProps) {
-    const [isToggleOpen, setIsToggleOpen] = useState(false)
-
     return (
         <>
             {/*<!-- Component: Basic Navbar --> */}

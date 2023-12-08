@@ -7,6 +7,11 @@ export interface RepositoryListItemProps {
     isLoading: boolean
 }
 
+/**
+ * A component to display a repository list item
+ * @param repository - The repository to display
+ * @param isLoading - Whether the repository is loading
+ */
 const RepositoryListItem: React.FC<RepositoryListItemProps> = ({
     repository = {},
     isLoading,

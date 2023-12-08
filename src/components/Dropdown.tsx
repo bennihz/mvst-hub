@@ -9,6 +9,9 @@ export default function Dropdown(props: {
     const wrapperRef = useRef(null)
     const { navigationItems } = props
 
+    /**
+     * Update the current item when the dropdown is opened
+     */
     useEffect(() => {
         if (currentItem !== null) {
             props.onChange(
@@ -17,6 +20,9 @@ export default function Dropdown(props: {
         }
     }, [currentItem])
 
+    /**
+     * Handle keyboard events
+     */
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
             if (isOpen) {
@@ -63,6 +69,9 @@ export default function Dropdown(props: {
         }
     }, [isOpen])
 
+    /**
+     * Close the dropdown when clicked outside
+     */
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
             if (
@@ -80,6 +89,9 @@ export default function Dropdown(props: {
         }
     }, [wrapperRef])
 
+    /**
+     * Handle item click
+     */
     const handleItemClick = (index: number) => {
         setCurrentItem(index)
         setIsOpen(false)

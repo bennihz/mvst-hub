@@ -6,6 +6,12 @@ interface FilterOptions {
     languageFilter: string
 }
 
+/**
+ * A hook to filter repositories
+ * @param repositories - The repositories to filter
+ * @param initialOptions - The initial filter options
+ * @returns The filtered repositories and a function to update the filter options
+ */
 const useFilter = (
     repositories: Repository[],
     initialOptions: FilterOptions,

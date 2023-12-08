@@ -8,6 +8,14 @@ export interface UserOverviewProps {
     location?: string
 }
 
+/**
+ * A component to display an overview of a GitHub user
+ * @param avatarUrl - The URL of the user's avatar
+ * @param username - The username of the user
+ * @param bio - The bio of the user
+ * @param profileUrl - The URL to the user's GitHub profile
+ * @param location - The location of the user
+ */
 const UserOverview: React.FC<UserOverviewProps> = ({
     avatarUrl,
     username,

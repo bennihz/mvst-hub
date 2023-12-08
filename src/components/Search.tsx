@@ -5,9 +5,17 @@ export interface SearchRepoProps {
     placeholder: string
 }
 
+/**
+ * A component to display a search input
+ * @param onSearch - The function to call when the search input changes
+ * @param placeholder - The placeholder text
+ */
 const Search: React.FC<SearchRepoProps> = ({ onSearch, placeholder }) => {
     const [text, setText] = useState<string>('')
 
+    /**
+     * Update the search text when the input changes
+     */
     useEffect(() => {
         onSearch(text)
     }, [text])
